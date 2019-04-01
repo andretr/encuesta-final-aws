@@ -1,0 +1,66 @@
+.metadata/
+Servers/
+.classpath
+.factorypath
+.project
+.setting
+.settings
+target
+bin
+
+## Angular ##
+# compiled output
+/dist
+/tmp
+/app/**/*.js
+/app/**/*.js.map
+
+# dependencies
+/node_modules/*
+node_modules
+/bower_components
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+e2e_test.*
+
+
+# IDEA metadata and output dirs
+*.iml
+*.ipr
+*.iws
+.idea
+out
+atlassian-ide-plugin.xml
+
+# NetBeans
+nbactions.xml
+nb-configuration.xml
+profiles.xml
+
+# Generales
+*~
+build
+build.sh
+derby.log
+.DS_Store
+.gradle
+*.java.hsp
+jmx.log
+jxl.log
+run.sh
+*.sonarj
+*.sw*
+
+# Maven
+target
+*.releaseBackup
+
+#Java errors
+hs_err_*.log
+
+# Atomikos
+*.epoch
+tmlog*
+*.war
