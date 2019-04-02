@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { ProblemaService } from '../../_services/problema.service';
-import { FeedBack } from '../../_model/Feedback';
+import { Encuesta } from '../../_model/Encuesta';
 import { NuevoComponent } from './nuevo/nuevo.component';
 
 @Component({
@@ -11,17 +11,17 @@ import { NuevoComponent } from './nuevo/nuevo.component';
 })
 export class ProblemaComponent implements OnInit {
 
-  dataSource:MatTableDataSource<FeedBack>;
+  dataSource:MatTableDataSource<Encuesta>;
   totalElementos: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['id', 'tema', 'mensaje', 'fecha', 'acciones'];
 
   constructor(
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private serviceProblema: ProblemaService,
     private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource<FeedBack>();
+    this.dataSource = new MatTableDataSource<Encuesta>();
   }
 
   ngOnInit() {
@@ -45,9 +45,9 @@ export class ProblemaComponent implements OnInit {
   }
 
   cargarTabla(pageIndex: number, pageSize: number, desdePaginador: boolean){
-    this.serviceProblema.obtenerFeedBacksPropios(pageIndex, pageSize).subscribe((datos) => {
+    this.serviceProblema.obtenerEncuestaPropios(pageIndex, pageSize).subscribe((datos) => {
       let feedbacks = JSON.parse(JSON.stringify(datos)).content;
-      this.dataSource = new MatTableDataSource<FeedBack>(feedbacks);
+      this.dataSource = new MatTableDataSource<Encuesta>(feedbacks);
       this.totalElementos = JSON.parse(JSON.stringify(datos)).totalElements;
       if(!desdePaginador){
         this.dataSource.paginator = this.paginator;

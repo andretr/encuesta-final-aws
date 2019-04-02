@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import aws.mitocode.spring.dto.SNSMessage;
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 import aws.mitocode.spring.service.IColaSQSService;
 import aws.mitocode.spring.service.IEmailService;
 
@@ -37,11 +37,11 @@ public class SQSServiceImpl implements IColaSQSService {
     		
     		SNSMessage mensajeSNS = mapper.readValue(json, SNSMessage.class);
     		
-    		FeedBack feedback = mapper.readValue(mensajeSNS.getMessage(), FeedBack.class);
+    		Encuesta encuesta = mapper.readValue(mensajeSNS.getMessage(), Encuesta.class);
     		
-    		logger.info("Received " + feedback.getIdUsuario() + " | "+feedback.getMensaje());
+    		logger.info("Received " + encuesta.getIdUsuario() + " | "+ encuesta.getLenguaje());
     		
-    		if(emailService.sendEmail(feedback)) {
+    		if(emailService.sendEmail(encuesta)) {
     			logger.info("Correo enviado");
     		}else {
     			logger.error("No se pudo enviar el correo");
@@ -51,7 +51,7 @@ public class SQSServiceImpl implements IColaSQSService {
     	}
     }
     
-    public void sendDataJMS(FeedBack feedBack) throws IOException {
+    public void sendDataJMS(Encuesta encuesta) throws IOException {
     	//jmsTemplate.convertAndSend("colaEnvioFeedBack", mapper.writeValueAsString(feedBack));
     }
 }

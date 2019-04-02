@@ -1,8 +1,8 @@
 package aws.mitocode.spring.service;
 
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 
 public interface INotificacionSNS {
 
-	public void enviarNotificacionSubscriptores(FeedBack feedback);
+	public void enviarNotificacionSubscriptores(Encuesta encuesta);
 }

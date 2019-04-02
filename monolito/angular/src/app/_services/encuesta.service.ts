@@ -8,27 +8,27 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ProblemaService {
+export class EncuestaService {
 
-  urlFeedback: string = `${HOST_BACKEND}/api/feedback`;
+  urlFeedback: string = `${HOST_BACKEND}/api/encuesta`;
 
   mensajeRegistro = new Subject<string>();
 
   constructor(private httpClient: HttpClient) { }
 
-  obtenerCatalogoProblemas() {
-    return this.httpClient.get<Problema[]>(`${this.urlFeedback}/problema/listar`);
+  obtenerListaEncuestas() {
+    return this.httpClient.get<Problema[]>(`${this.urlFeedback}/listar`);
   }
 
-  obtenerFeedBacksPropios(page: number, size: number) {
+  obtenerEncuestaPropios(page: number, size: number) {
     return this.httpClient.get<FeedBack[]>(`${this.urlFeedback}/listar?page=${page}&size=${size}`);
   }
 
-  guardarFeedBack(feedback: FeedBack) {
+  guardarEncuesta(feedback: FeedBack) {
     return this.httpClient.post(`${this.urlFeedback}/registrar`, feedback);
   }
 
-  eliminarFeedBack(id: number) {
+  eliminarEncuesta(id: number) {
     return this.httpClient.delete(`${this.urlFeedback}/eliminar/${id}`);
   }
 }

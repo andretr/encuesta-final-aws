@@ -7,20 +7,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 
 @Repository
-public interface IFeedBackDao extends JpaRepository<FeedBack, Integer> {
+public interface IEncuestaDao extends JpaRepository<Encuesta, Integer> {
 
 	@Query(value = "select f"
-			+ " from FeedBack f"
+			+ " from Encuesta f"
 			+ "	where f.idUsuario=:usuario",
 			countQuery = "select count(f)"
-					+ " from FeedBack f"
+					+ " from Encuesta f"
 					+ "	where f.idUsuario=:usuario")
-	Page<FeedBack> obtenerFeedBacksPorUsuario(Pageable pageable, @Param("usuario") String usuario);
+	Page<Encuesta> obtenerEncuestaPorUsuario(Pageable pageable, @Param("usuario") String usuario);
 	
-	@Query(value = "select f from FeedBack f",
-			countQuery = "select count(f) from FeedBack f")
-	Page<FeedBack> obtenerFeedBacks(Pageable pageable);
+	@Query(value = "select f from Encuesta f",
+			countQuery = "select count(f) from Encuesta f")
+	Page<Encuesta> obtenerEncuestas(Pageable pageable);
 }

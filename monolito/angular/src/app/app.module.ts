@@ -6,10 +6,8 @@ import { MaterialModule } from './material/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MapaComponent } from './pages/mapa/mapa.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ProblemaComponent } from './pages/problema/problema.component';
-import { DetalleComponent } from './pages/mapa/detalle/detalle.component';
 import { NuevoComponent } from './pages/problema/nuevo/nuevo.component';
 import { SecurityComponent } from './pages/security/security.component';
 import { LogoutComponent } from './pages/logout/logout.component';
@@ -29,10 +27,8 @@ import { ErrorComponent } from './pages/login/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MapaComponent,
     AboutComponent,
     ProblemaComponent,
-    DetalleComponent,
     NuevoComponent,
     SecurityComponent,
     LogoutComponent,
@@ -51,11 +47,7 @@ import { ErrorComponent } from './pages/login/error/error.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule,
-    //API KEY de google maps configurado en google cloud platform
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDRlxhDKnHX5ie8Y3gJe1YOYpC4dWpa0no'
-    })
+    HttpClientModule
   ],
   providers: [
     {
@@ -66,9 +58,8 @@ import { ErrorComponent } from './pages/login/error/error.component';
     { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
   entryComponents: [
-    DetalleComponent, 
-    NuevoComponent, 
-    NuevoTipoNegocioComponent, 
+    NuevoComponent,
+    NuevoTipoNegocioComponent,
     NuevonegocioComponent,
     NuevasedeComponent,
     ErrorComponent]

@@ -10,7 +10,7 @@ import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 import aws.mitocode.spring.service.INotificacionSNS;
 
 @Service
@@ -18,15 +18,10 @@ public class NotificacionSNSServiceImpl implements INotificacionSNS {
 	
 	private Logger logger = Logger.getLogger(NotificacionSNSServiceImpl.class);
 
-	/**
-	* Colocar la ARN que identifica a su SNS, es importante que este demo está trabajando con la region us-east-1 (virginia)
-	* Cambiar el numero 123456789012 por su numero de cuenta AWS
-	* procesarFeedBack es el nombre del topico de SNS, puede cambiarse por el que UD configura
-	*/
-	//private static final String ARN_TOPICO_PROCESA_FEEDBACK = "arn:aws:sns:us-east-1:123456789012:procesarFeedBack";
+	//private static final String ARN_TOPICO_PROCESA_ENCUESTA = "arn:aws:sns:us-east-1:123456789012:procesarFeedBack";
 
 	@Value("${topico.aws.sns}")
-	private String ARN_TOPICO_PROCESA_FEEDBACK;
+	private String ARN_TOPICO_PROCESA_ENCUESTA;
 
 	@Autowired
 	private ObjectMapper mapper;
@@ -34,12 +29,12 @@ public class NotificacionSNSServiceImpl implements INotificacionSNS {
 	@Autowired
 	private AmazonSNSClient servicioSNS;
 
-	public void enviarNotificacionSubscriptores(FeedBack feedback) {
+	public void enviarNotificacionSubscriptores(Encuesta encuesta) {
 		try {
-			PublishRequest publishRequest = new PublishRequest(ARN_TOPICO_PROCESA_FEEDBACK,
-					mapper.writeValueAsString(feedback));
+			PublishRequest publishRequest = new PublishRequest(ARN_TOPICO_PROCESA_ENCUESTA,
+					mapper.writeValueAsString(encuesta));
 			
-			System.out.println("ARN_TOPICO_PROCESA_FEEDBACK: " + ARN_TOPICO_PROCESA_FEEDBACK);
+			System.out.println("ARN_TOPICO_PROCESA_ENCUESTA: " + ARN_TOPICO_PROCESA_ENCUESTA);
 			PublishResult publishResult = servicioSNS.publish(publishRequest);
 			
 			logger.info("MessageId - " + publishResult.getMessageId());

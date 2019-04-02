@@ -6,11 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 
-public interface IFeedBackService {
+public interface IEncuestaService {
 
-	Page<FeedBack> obtenerDatosPaginados(Pageable pageable, String usuario, Collection<GrantedAuthority> ltaRoles);
-	void guardarDatos(FeedBack feedback);
+	Page<Encuesta> obtenerDatosPaginados(Pageable pageable, String usuario, Collection<GrantedAuthority> ltaRoles);
+	void guardarDatos(Encuesta encuesta);
 	void eliminarDatos(int id);
 }

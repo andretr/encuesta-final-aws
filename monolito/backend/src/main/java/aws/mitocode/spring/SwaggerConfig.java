@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("aws.mitocode.spring.controller.api"))              
+          .apis(RequestHandlerSelectors.basePackage("aws.mitocode.spring.controller.api"))
           .paths(PathSelectors.any())                          
           .build()
           .apiInfo(apiInfo());
@@ -28,11 +28,11 @@ public class SwaggerConfig {
     
     private ApiInfo apiInfo() {
         return new ApiInfo(
-          "RestApi GeoServicios", 
-          "Servicios Rest para el curso Mitocode", 
+          "RestApi Encuesta",
+          "Servicios Rest para el proyecto final AWS",
           "API ToS", 
           "Terms of service", 
-          new Contact("@wjma90", "https://twitter.com/wjma90", "w.marchanaranda@gmail.com"), 
+          new Contact("@wjma90", "https://twitter.com/wjma90", "andre.ticona.r@gmail.com"),
           "License of API", "API license URL", Collections.emptyList());
    }
 }

@@ -9,24 +9,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import aws.mitocode.spring.dao.IFeedBackDao;
-import aws.mitocode.spring.model.FeedBack;
-import aws.mitocode.spring.service.IFeedBackService;
+import aws.mitocode.spring.dao.IEncuestaDao;
+import aws.mitocode.spring.model.Encuesta;
+import aws.mitocode.spring.service.IEncuestaService;
 import aws.mitocode.spring.service.INotificacionSNS;
 
 @Service
-public class FeedBackServiceImpl implements IFeedBackService {
+public class EncuestaServiceImpl implements IEncuestaService {
 	
-	private Logger logger = Logger.getLogger(FeedBackServiceImpl.class);
+	private Logger logger = Logger.getLogger(EncuestaServiceImpl.class);
 
 	@Autowired
-	private IFeedBackDao feedbackDao;
+	private IEncuestaDao encuestaDao;
 	
 	@Autowired
 	private INotificacionSNS notificacionSNS;
 	
 	@Override
-	public Page<FeedBack> obtenerDatosPaginados(Pageable pageable, String usuario, Collection<GrantedAuthority> ltaRoles) {
+	public Page<Encuesta> obtenerDatosPaginados(Pageable pageable, String usuario, Collection<GrantedAuthority> ltaRoles) {
 		boolean isAdmin = false;
 		if(ltaRoles != null && ltaRoles.size() > 0) {
 			for(GrantedAuthority rol : ltaRoles) {
@@ -37,16 +37,16 @@ public class FeedBackServiceImpl implements IFeedBackService {
 			}
 		}
 		if(isAdmin) {
-			return feedbackDao.obtenerFeedBacks(pageable);
+			return encuestaDao.obtenerEncuestas(pageable);
 		}
-		return feedbackDao.obtenerFeedBacksPorUsuario(pageable, usuario);
+		return encuestaDao.obtenerEncuestaPorUsuario(pageable, usuario);
 	}
 
 	@Override
-	public void guardarDatos(FeedBack feedback) {
-		feedbackDao.save(feedback);
+	public void guardarDatos(Encuesta encuesta) {
+		encuestaDao.save(encuesta);
 		try {
-			notificacionSNS.enviarNotificacionSubscriptores(feedback);
+			notificacionSNS.enviarNotificacionSubscriptores(encuesta);
 		}catch(Exception e) {
 			logger.info("Error al enviar datos a la cola");
 		}
@@ -54,7 +54,7 @@ public class FeedBackServiceImpl implements IFeedBackService {
 
 	@Override
 	public void eliminarDatos(int id) {
-		feedbackDao.delete(id);
+		encuestaDao.delete(id);
 		
 	}
 

@@ -11,7 +11,7 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 
-import aws.mitocode.spring.model.FeedBack;
+import aws.mitocode.spring.model.Encuesta;
 import aws.mitocode.spring.service.IEmailService;
 
 @Service
@@ -27,27 +27,28 @@ public class EmailServiceImpl implements IEmailService{
 	//Este correo debe existir en AWS SES y debe estar verificado, caso contrario, aws nos devolverá un error
 	static final String TO = "aticona@mc4.com.bo";
 	
-	static final String SUBJECT = "Notificación GeoServicios FeedBack";
+	static final String SUBJECT = "Notificación Encuesta";
 	  
-	static final String HTMLBODY = "<h1>Nuevo FeedBack</h1><p>%s | %s</p><br><h4>Recibido de: %s</h4>";
+	static final String HTMLBODY = "<h1>Nueva Respuesta</h1><p>%s | %s</p><br><h4>Recibido de: %s</h4>";
 
-	static final String TEXTBODY = "Nuevo FeedBack: %s | %s. Recibido de %s";
+	static final String TEXTBODY = "Nuevo Respuesta: %s | %s. Recibido de %s";
     
     @Autowired
     private AmazonSimpleEmailService emailAwsService;
     
     
 
-    public boolean sendEmail(FeedBack feedback) {
+    public boolean sendEmail(Encuesta encuesta) {
     	try {
+    		//TODO review email
     		String mensajeCorreoHTML = String.format(HTMLBODY, 
-    				feedback.getProblema().getDescripcion(),
-    				feedback.getMensaje(), 
-    				feedback.getIdUsuario());
+//    				encuesta.getProblema().getDescripcion(),
+//    				encuesta.getMensaje(),
+    				encuesta.getIdUsuario());
     		String mensajeCorreoTEXT = String.format(TEXTBODY,
-    				feedback.getProblema().getDescripcion(),
-    				feedback.getMensaje(), 
-    				feedback.getIdUsuario());
+//    				encuesta.getProblema().getDescripcion(),
+//    				encuesta.getMensaje(),
+    				encuesta.getIdUsuario());
     		SendEmailRequest request = new SendEmailRequest()
     		          .withDestination(
     		              new Destination().withToAddresses(TO))
