@@ -28,42 +28,37 @@ public class ApiSecurityController {
 
 	@PostMapping(value="token", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RespuestaApi> verificarToken(){
-		return new ResponseEntity<RespuestaApi>(
-				new RespuestaApi("OK",SecurityContextHolder.getContext().getAuthentication().getPrincipal()), HttpStatus.OK);
+		return new ResponseEntity<>(
+				new RespuestaApi("OK", SecurityContextHolder.getContext().getAuthentication().getPrincipal()), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="login", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RespuestaApi> login(
-			@RequestBody LoginDTO login){
-		return new ResponseEntity<RespuestaApi>(
+	public ResponseEntity<RespuestaApi> login(@RequestBody LoginDTO login){
+		return new ResponseEntity<>(
 				securityService.getToken(login.getUsername(), login.getPassword()), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="first-reset-password", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RespuestaApi> renewPasswordFirst(
-			@RequestBody RenewPasswordFirstDTO updatePassword){
-		return new ResponseEntity<RespuestaApi>(
+	public ResponseEntity<RespuestaApi> renewPasswordFirst(@RequestBody RenewPasswordFirstDTO updatePassword){
+		return new ResponseEntity<>(
 				securityService.resetNewPasswordFirst(updatePassword), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="change-password", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RespuestaApi> updatePassword(
-			@RequestBody UpdatePasswordDTO updatePassword){
-		return new ResponseEntity<RespuestaApi>(
+	public ResponseEntity<RespuestaApi> updatePassword(@RequestBody UpdatePasswordDTO updatePassword){
+		return new ResponseEntity<>(
 				securityService.updatePassword(updatePassword), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="signout", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RespuestaApi> signOut(
-			@RequestBody BasicAccessDTO token){
-		return new ResponseEntity<RespuestaApi>(
+	public ResponseEntity<RespuestaApi> signOut(@RequestBody BasicAccessDTO token){
+		return new ResponseEntity<>(
 				securityService.signOut(token.getToken()), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="refresh-token", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RespuestaApi> refreshToken(
-			@RequestBody BasicAccessDTO token){
-		return new ResponseEntity<RespuestaApi>(
+	public ResponseEntity<RespuestaApi> refreshToken(@RequestBody BasicAccessDTO token){
+		return new ResponseEntity<>(
 				securityService.refreshToken(token.getToken()), HttpStatus.OK);
 	}
 }

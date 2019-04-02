@@ -55,7 +55,7 @@ public class AwsCognitoJwtAuthenticationFilter extends GenericFilterBean {
 
 	private static final String HEADER_AUTHORIZATION = "Authorization";
 
-	private static final Logger logger = LoggerFactory.getLogger(AwsCognitoJwtAuthenticationFilter.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AwsCognitoJwtAuthenticationFilter.class);
 
 	@Autowired
 	private JWTVerifier verificadorJWT;
@@ -112,9 +112,9 @@ public class AwsCognitoJwtAuthenticationFilter extends GenericFilterBean {
 
 			} catch (Exception e) {
 				if (e instanceof TokenExpiredException) {
-					logger.error("Expiró la sesión del token " + tokenJWT);
+					LOGGER.error("Expiró la sesión del token " + tokenJWT);
 				} else {
-					logger.error("Error occured while processing Cognito ID Token", e);
+					LOGGER.error("Error occured while processing Cognito ID Token", e);
 				}
 				SecurityContextHolder.clearContext();
 

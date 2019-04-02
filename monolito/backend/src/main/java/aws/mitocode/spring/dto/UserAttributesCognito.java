@@ -1,20 +1,13 @@
 package aws.mitocode.spring.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UserAttributesCognito {
 
 	private String email_verified;
 	private String email;
-	
-	public String getEmail_verified() {
-		return email_verified;
-	}
-	public void setEmail_verified(String email_verified) {
-		this.email_verified = email_verified;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 }
