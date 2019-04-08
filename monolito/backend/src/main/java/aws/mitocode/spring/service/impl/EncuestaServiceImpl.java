@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import aws.mitocode.spring.dao.IEncuestaDao;
 import aws.mitocode.spring.model.Encuesta;
 import aws.mitocode.spring.service.IEncuestaService;
-import aws.mitocode.spring.service.INotificacionSNS;
 
 @Service
 public class EncuestaServiceImpl implements IEncuestaService {
@@ -21,9 +20,6 @@ public class EncuestaServiceImpl implements IEncuestaService {
 
 	@Autowired
 	private IEncuestaDao encuestaDao;
-	
-	@Autowired
-	private INotificacionSNS notificacionSNS;
 	
 	@Override
 	public Page<Encuesta> obtenerDatosPaginados(Pageable pageable, String usuario, Collection<GrantedAuthority> ltaRoles) {
@@ -43,19 +39,13 @@ public class EncuestaServiceImpl implements IEncuestaService {
 	}
 
 	@Override
-	public void guardarDatos(Encuesta encuesta) {
-		encuestaDao.save(encuesta);
-		try {
-			notificacionSNS.enviarNotificacionSubscriptores(encuesta);
-		}catch(Exception e) {
-			logger.info("Error al enviar datos a la cola");
-		}
+	public Encuesta obtenerEncuestaById(Integer id) {
+		return encuestaDao.findById(id);
 	}
 
 	@Override
-	public void eliminarDatos(int id) {
-		encuestaDao.delete(id);
-		
+	public void guardarDatos(Encuesta encuesta) {
+		encuestaDao.save(encuesta);
 	}
 
 }

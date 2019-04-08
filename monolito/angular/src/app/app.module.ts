@@ -1,44 +1,33 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MaterialModule } from './material/material.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MaterialModule} from './material/material.module';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ProblemaComponent } from './pages/problema/problema.component';
-import { NuevoComponent } from './pages/problema/nuevo/nuevo.component';
-import { SecurityComponent } from './pages/security/security.component';
-import { LogoutComponent } from './pages/logout/logout.component';
-import { TokenInterceptorService } from './_services/token-interceptor.service';
-import { TiponegocioComponent } from './pages/admin/tiponegocio/tiponegocio.component';
-import { NegocioComponent } from './pages/admin/negocio/negocio.component';
-import { SedesComponent } from './pages/admin/sedes/sedes.component';
-import { AdminComponent } from './pages/admin/admin/admin.component';
-import { NuevoTipoNegocioComponent } from './pages/admin/tiponegocio/nuevo/nuevo.component';
-import { NuevonegocioComponent } from './pages/admin/negocio/nuevonegocio/nuevonegocio.component';
-import { NuevasedeComponent } from './pages/admin/sedes/nuevasede/nuevasede.component';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { BodyComponent } from './pages/body/body.component';
-import { LoginComponent } from './pages/login/login.component';
-import { ErrorComponent } from './pages/login/error/error.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {EncuestaComponent} from './pages/encuesta/encuesta.component';
+import {EditarComponent} from './pages/admin/resultados/editar/editar.component';
+import {SecurityComponent} from './pages/security/security.component';
+import {LogoutComponent} from './pages/logout/logout.component';
+import {TokenInterceptorService} from './_services/token-interceptor.service';
+import {AdminComponent} from './pages/admin/admin/admin.component';
+
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {BodyComponent} from './pages/body/body.component';
+import {LoginComponent} from './pages/login/login.component';
+import {ErrorComponent} from './pages/login/error/error.component';
+import {ResultadosComponent} from "./pages/admin/resultados/resultados.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
-    ProblemaComponent,
-    NuevoComponent,
+    EncuestaComponent,
+    ResultadosComponent,
+    EditarComponent,
     SecurityComponent,
     LogoutComponent,
-    TiponegocioComponent,
-    NegocioComponent,
-    SedesComponent,
     AdminComponent,
-    NuevoTipoNegocioComponent,
-    NuevonegocioComponent,
-    NuevasedeComponent,
     BodyComponent,
     LoginComponent,
     ErrorComponent
@@ -47,7 +36,8 @@ import { ErrorComponent } from './pages/login/error/error.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    MatRadioModule
   ],
   providers: [
     {
@@ -58,10 +48,7 @@ import { ErrorComponent } from './pages/login/error/error.component';
     { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
   entryComponents: [
-    NuevoComponent,
-    NuevoTipoNegocioComponent,
-    NuevonegocioComponent,
-    NuevasedeComponent,
+    EditarComponent,
     ErrorComponent]
 })
 export class AppModule { }

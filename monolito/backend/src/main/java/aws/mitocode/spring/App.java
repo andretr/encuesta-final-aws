@@ -27,39 +27,12 @@ public class App extends WebMvcConfigurerAdapter{
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
-	
-	//Es importante indicar que esta demo trabaja en la region us-east-1 (Virginia)
-	@Bean
-	public AmazonSimpleEmailService crearSES() {
-//		AmazonSimpleEmailService clienteSES = new AmazonSimpleEmailServiceClient( new DefaultAWSCredentialsProviderChain() );
-
-		AmazonSimpleEmailService clienteSES = AmazonSimpleEmailServiceClientBuilder.standard()
-                .withRegion(Regions.US_EAST_1)
-                .withCredentials(new DefaultAWSCredentialsProviderChain())
-                .build();
-
-//		clienteSES.setRegion();
-		return clienteSES;
-	}
-	
-	@Bean
-	public AmazonSNSClient crearSNS() {
-		AmazonSNSClient clienteSNS = new AmazonSNSClient(new DefaultAWSCredentialsProviderChain());		                           
-		clienteSNS.setRegion(Region.getRegion(Regions.US_EAST_1));
-		return clienteSNS;
-	}
 
 	@Bean
-	public AWSCognitoIdentityProviderClient CognitoClient() {        
-        AWSCognitoIdentityProviderClient cognitoClient = new AWSCognitoIdentityProviderClient(new DefaultAWSCredentialsProviderChain());
-        cognitoClient.setRegion(Region.getRegion(Regions.US_EAST_1));
-                
-        return cognitoClient;
+	public AWSCognitoIdentityProviderClient CognitoClient() {
+		AWSCognitoIdentityProviderClient cognitoClient = new AWSCognitoIdentityProviderClient(new DefaultAWSCredentialsProviderChain());
+		cognitoClient.setRegion(Region.getRegion(Regions.US_EAST_1));
+
+		return cognitoClient;
 	}
-	/*
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-	 	registry.addMapping("/**").allowedOrigins("*");
-	}
-	*/
 }

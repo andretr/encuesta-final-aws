@@ -1,0 +1,44 @@
+<div class="example-container">
+  <h2 mat-dialog-title>Formulario de Edici&oacute;n</h2>
+  <mat-dialog-content>
+
+    <form class="mat-dialog-content" (ngSubmit)="onSubmit()" #formControl="ngForm" #myform="ngForm">
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput name="encuesta.id" placeholder="ID"  [(ngModel)]="data.encuesta.id" required disabled >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput name="encuesta.nombres" placeholder="Nombre(s)"  [(ngModel)]="data.encuesta.nombres"  required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput name="data.apellidos" placeholder="Apellido(s)" [(ngModel)]="data.encuesta.apellidos" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" name="data.edad" placeholder="Edad" [(ngModel)]="data.encuesta.edad" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-radio-group aria-label="Lenguaje favorito" class="example-radio-group" name="encuesta.lenguaje"  [(ngModel)]="data.encuesta.lenguaje" required="">
+          <mat-radio-button value="Java">Java</mat-radio-button>
+          <mat-radio-button value="C#">C#</mat-radio-button>
+        </mat-radio-group>
+      </p>
+<!--      <p>
+        <mat-select name="encuesta.lenguaje2" placeholder="Lenguaje favorito" [(ngModel)]="data.encuesta.lenguaje" required>
+          <mat-option *ngFor="let prob of lenguajes" [value]="prob.value">
+            {{prob.viewValue}}
+          </mat-option>
+        </mat-select>
+      </p>-->
+      <button type="submit" mat-fab color="primary" [disabled]="myform.invalid">Enviar</button>
+    </form>
+
+
+  </mat-dialog-content>
+</div>

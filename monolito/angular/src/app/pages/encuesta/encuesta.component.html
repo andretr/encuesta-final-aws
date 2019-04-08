@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <p>
+      Por favor ingrese sus datos e indique su lenguaje de programaci&oacute;n favorito:
+    </p>
+    <form #myform="ngForm" class="example-form" (ngSubmit)="onSubmit();myform.reset()">
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput name="encuesta.nombres" placeholder="Nombre(s)" [(ngModel)]="encuesta.nombres" required >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput name="encuesta.apellidos" placeholder="Apellido(s)" [(ngModel)]="encuesta.apellidos" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input type="number" matInput name="encuesta.edad" placeholder="Edad" [(ngModel)]="encuesta.edad" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-radio-group aria-label="Lenguaje favorito" class="example-radio-group" name="encuesta.lenguaje"  [(ngModel)]="encuesta.lenguaje" required="">
+          <mat-radio-button value="Java">Java</mat-radio-button>
+          <mat-radio-button value="C#">C#</mat-radio-button>
+        </mat-radio-group>
+      </p>
+      <!--<p>-->
+        <!--<mat-select placeholder="Lenguaje favorito"-->
+                    <!--name="encuesta.lenguaje" [(ngModel)]="encuesta.lenguaje" required>-->
+          <!--<mat-option *ngFor="let prob of lenguajes" [value]="prob.value">-->
+            <!--{{prob.viewValue}}-->
+          <!--</mat-option>-->
+        <!--</mat-select>-->
+      <!--</p>-->
+
+      <button type="submit" mat-fab color="primary" [disabled]="myform.invalid">Enviar</button>
+    </form>
+  </mat-card-content>
+</mat-card>

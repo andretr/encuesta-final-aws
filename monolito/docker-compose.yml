@@ -1,12 +1,10 @@
 version: '3.4'
 
-####### REVISEN LAS FUENTES DEL MONOLITO PARA QUE VEAN DONDE SE CAMBIARON ALGUNOS VALORES ############
-
 services:
 
-  mysql_server:
-    build: encuesta-mysql/
-    image: encuestadb:latest
+  encuestadb:
+    build: mysql/
+    image: andretr/encuestadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=12345678
       - MYSQL_DATABASE=encuesta
@@ -20,33 +18,32 @@ services:
     restart: on-failure
     command: --default-authentication-plugin=mysql_native_password
     networks:
-      - backend
+      - my_network
 
-  monolito:
-    build: encuesta-monolito/
-    image: encuesta:latest
-    environment: 
-      - userPoolId=XXXXX
-      - host=mysql_server
+  encuesta_monolito:
+    build: backend/
+    image: andretr/encuesta-backend:latest
+    environment:
+      - userPoolId=us-east-1_nTNZYp2XM
+      - host=encuestadb
       - port=3306
       - database=encuesta
       - username=root
       - password=12345678
-      - clientId=XXXXX
-      - topico.aws.sns=XXXXX
-      - AWS_ACCESS_KEY_ID=XXXX
-      - AWS_SECRET_ACCESS_KEY=XXXX
-    depends_on: 
-      - mysql_server
+      - clientId=4liqf08q9atrnnf2dtiiqnl8uc
+      - AWS_ACCESS_KEY_ID=XXXXX
+      - AWS_SECRET_ACCESS_KEY=XXXXXX
+    depends_on:
+      - encuestadb
     ports:
       - "80:8080"
     restart: on-failure
-    entrypoint: dockerize -wait tcp://mysql_server:3306 -timeout 10m java -jar /workspace/app.jar
+    entrypoint: dockerize -wait tcp://encuestadb:3306 -timeout 10m java -jar /workspace/app.jar
     networks:
-      - backend
+      - my_network
 
 volumes:
   my-data:
 
 networks:
-  backend: 
+  my_network:

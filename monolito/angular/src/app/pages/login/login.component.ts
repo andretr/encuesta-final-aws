@@ -15,7 +15,7 @@ import { LoginDTO } from '../../_model/LoginDTO';
 export class LoginComponent implements OnInit {
 
   login: LoginDTO;
-  
+
   constructor(
     private router: Router,
     private securityService: SecurityService,
@@ -36,16 +36,16 @@ export class LoginComponent implements OnInit {
 
         this.securityService.validarToken().subscribe((dato: any)=>{
           sessionStorage.setItem(PARAM_USUARIO, JSON.stringify(dato.body));
-          this.router.navigate(["app/mapa"]);
+          this.router.navigate(["app/encuesta"]);
         });
       }else{
         this.dialog.open(ErrorComponent, {
           width: '60%',
           height: '60%',
-          data: { 
+          data: {
             error: data.body,
             dato: data,
-            usuario: this.login.username 
+            usuario: this.login.username
           }
         });
       }

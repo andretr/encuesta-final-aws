@@ -3,7 +3,6 @@ server:
 
 userPoolId: ${userPoolId}
 awsregion: us-east-1
-topico.aws.sns: arn:aws:sns:us-east-1:575887703753:topico-curso-jaws
 
 spring:
   jpa:

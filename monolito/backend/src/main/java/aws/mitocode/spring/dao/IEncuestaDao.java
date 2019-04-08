@@ -23,4 +23,6 @@ public interface IEncuestaDao extends JpaRepository<Encuesta, Integer> {
 	@Query(value = "select f from Encuesta f",
 			countQuery = "select count(f) from Encuesta f")
 	Page<Encuesta> obtenerEncuestas(Pageable pageable);
+
+	Encuesta findById(@Param("id") Integer id);
 }

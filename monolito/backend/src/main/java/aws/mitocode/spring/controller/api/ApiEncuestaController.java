@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,17 @@ public class ApiEncuestaController {
 
     @Autowired
     private IEncuestaService encuestaService;
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping(value="listar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> obtenerTodos(@PathVariable int id){
+        try {
+            return new ResponseEntity<>(encuestaService.obtenerEncuestaById(id), HttpStatus.OK);
+        }catch(Exception e) {
+            logger.error("Error: ",e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping(value="listar", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> obtenerTodos(Pageable pageable){
@@ -50,6 +62,7 @@ public class ApiEncuestaController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value="editar/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RespuestaApi> editarEncuesta(@PathVariable int id, @RequestBody Encuesta encuesta){
         try {

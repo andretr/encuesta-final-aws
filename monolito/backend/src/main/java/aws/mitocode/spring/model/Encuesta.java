@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "encuesta")
+@Table(name = "encuestas")
 @Getter
 @Setter
 public class Encuesta implements Serializable {
@@ -17,7 +17,7 @@ public class Encuesta implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name = "nombres", nullable = false)
 	private String nombres;

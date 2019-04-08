@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FeedBack } from '../_model/Feedback';
+import { Encuesta } from '../_model/Encuesta';
 import { HttpClient } from '@angular/common/http';
 import { HOST_BACKEND, TOKEN_NAME } from '../_shared/constants';
-import { Problema } from '../_model/Problema';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -16,19 +15,22 @@ export class EncuestaService {
 
   constructor(private httpClient: HttpClient) { }
 
+  obtenerEncuesta(id: number) {
+    return this.httpClient.get<Encuesta>(`${this.urlFeedback}/listar/${id}`);
+  }
   obtenerListaEncuestas() {
-    return this.httpClient.get<Problema[]>(`${this.urlFeedback}/listar`);
+    return this.httpClient.get<Encuesta[]>(`${this.urlFeedback}/listar`);
   }
 
   obtenerEncuestaPropios(page: number, size: number) {
-    return this.httpClient.get<FeedBack[]>(`${this.urlFeedback}/listar?page=${page}&size=${size}`);
+    return this.httpClient.get<Encuesta[]>(`${this.urlFeedback}/listar?page=${page}&size=${size}`);
   }
 
-  guardarEncuesta(feedback: FeedBack) {
-    return this.httpClient.post(`${this.urlFeedback}/registrar`, feedback);
+  guardarEncuesta(encuesta: Encuesta) {
+    return this.httpClient.post(`${this.urlFeedback}/registrar`, encuesta);
   }
 
-  eliminarEncuesta(id: number) {
-    return this.httpClient.delete(`${this.urlFeedback}/eliminar/${id}`);
+  editarEncuesta(id: number, encuesta: Encuesta) {
+    return this.httpClient.put(`${this.urlFeedback}/editar/${id}`, encuesta);
   }
 }
